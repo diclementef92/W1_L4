@@ -12,7 +12,7 @@ public class Dipendente {
 		this.matricola = matr;
 		this.dipartimento = dipartimento;
 		this.stipendio = stipendioBase;
-		this.importoOrarioStraordinario = 10;
+		this.importoOrarioStraordinario = 30;
 		this.livello = Livello.OPERAIO;
 	}
 
@@ -70,36 +70,40 @@ public class Dipendente {
 		case OPERAIO: {
 			setLivello(Livello.IMPIEGATO);
 			setStipendio(getStipendioBase() * 1.2);
+			break;
 		}
 		case IMPIEGATO: {
 			setLivello(Livello.QUADRO);
 			setStipendio(getStipendioBase() * 1.5);
+			break;
 		}
 		case QUADRO: {
 			setLivello(Livello.DIRIGENTE);
 			setStipendio(getStipendioBase() * 2);
-
+			break;
 		}
 		case DIRIGENTE: {
 			System.out.println("Errore: impossibile promuovere un dirigente");
+			break;
 		}
 		default:
 			System.out.println(
 					"Errore in classe Dipendente, metodo promuovi, livello dipendente non trovato" + this.getLivello());
 		}
+
 		return getLivello();
 	}
 
-	public double calcolaPaga() {
-		return getStipendio();
+	public static double calcolaPaga(Dipendente d) {
+		return d.getStipendio();
 	}
 
-	public double calcolaPaga(int oreStraordinario) {
-		return getStipendio() + (oreStraordinario * getImportoOrarioStraordinario());
+	public static double calcolaPaga(Dipendente d, int oreStraordinario) {
+		return d.getStipendio() + (oreStraordinario * d.getImportoOrarioStraordinario());
 	}
 	public String toString () {
-		String text = "Dipendete:\nMatricola N°:" + getMatricola() + "\nDiaprtimento: " + getDipartimento()
-				+ "Livello: " + getLivello() + "\nStipendio: " + getStipendio() + "\nOrarioStraordiario: "
+		String text = "\n-Dipendente-\nMatricola:" + getMatricola() + "\nDipartimento: " + getDipartimento()
+				+ "\nLivello: " + getLivello() + "\nStipendio: " + getStipendio() + "\nOrarioStraordiario: "
 				+ getImportoOrarioStraordinario();
 		return text;
 	}
